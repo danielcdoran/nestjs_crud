@@ -49,8 +49,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: password
     ports:
       - 5050:80
-    # volumes:
-    #     - ./db/servers.json:/pgadmin4/servers.json
+    volumes:
+        - ./db/servers.json:/pgadmin4/servers.json
 
 volumes:
   pgdata: {}
