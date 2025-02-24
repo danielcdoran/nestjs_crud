@@ -16,7 +16,9 @@ services:
       - PG_PORT=5432
     depends_on:
       - db
-    command: tail -F anything
+    command: npm run start
+    # command: tail -F anything
+
   db:
     container_name: db
     image: postgres:12
