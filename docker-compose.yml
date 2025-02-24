@@ -16,7 +16,9 @@ services:
       - PG_PORT=5432
     command: npm run start
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+        restart: true
 
   db:
     container_name: db
@@ -29,18 +31,26 @@ services:
       - POSTGRES_DB=postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+        interval: 10s
+        retries: 5
+        start_period: 30s
+        timeout: 10s    
 
   postgres_admin:
     image: dpage/pgadmin4:4.28
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+        restart: true
     environment: 
       PGADMIN_DEFAULT_EMAIL: admin@admin.de
       PGADMIN_DEFAULT_PASSWORD: password
     ports:
       - 5050:80
-    volumes:
-        - ./db/servers.json:/pgadmin4/servers.json
+    # volumes:
+    #     - ./db/servers.json:/pgadmin4/servers.json
 
 volumes:
   pgdata: {}
