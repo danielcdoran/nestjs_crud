@@ -72,7 +72,6 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](LICENSE).
 
-docker ps -q | % { docker stop $_ }docker ps
 
 curl --location 'localhost:3000/users' \
 --header 'Content-Type: application/json' \
