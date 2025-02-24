@@ -72,4 +72,34 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](LICENSE).
 
-https://dzone.com/articles/tdd-typescript-nestjs-api-layers-with-jest-part3-repository
+docker ps -q | % { docker stop $_ }docker ps
+
+curl --location 'localhost:3000/users' \
+--header 'Content-Type: application/json' \
+--data '    {
+        "name": "namevalue2",
+        "email": "eamilvalue2"
+    }'
+
+    curl --location --request GET 'localhost:3000/users' \
+--header 'Content-Type: application/json' \
+--data '    {
+        "name": "namevalue2",
+        "email": "eamilvalue2"
+    }'   
+
+    Invoke-RestMethod -Uri https://blogs.msdn.microsoft.com/powershell/feed/
+    Invoke-RestMethod -Uri http://localhost:3000/users  
+
+    Invoke-RestMethod -Method 'Post' -Uri http://localhost:3000/users -Headers $headers -Body  $Form
+
+$Form = @{ 
+'name'  = 'John' 
+'email' = 'Doe' 
+}
+
+$headers = @{
+    'Content-Type' = 'application/json'
+}
+ Invoke-RestMethod -Method 'Post' -Uri http://localhost:3000/users -Headers $headers -Body $Form
+ 
