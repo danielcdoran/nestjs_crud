@@ -8,7 +8,7 @@
     "workspaceFolder": "/src/",
     "customizations": {
         "vscode": {
-            "extensions": [
+            "extensions": [  
                 "aaron-bond.better-comments",
                 "ms-vscode-remote.remote-containers",
                 "mikestead.dotenv",
