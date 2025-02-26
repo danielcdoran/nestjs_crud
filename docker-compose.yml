@@ -39,7 +39,7 @@ services:
         timeout: 10s    
 
   postgres_admin:
-    image: dpage/pgadmin4:4.28
+    image: dpage/pgadmin4:9.0
     depends_on:
       db:
         condition: service_healthy
