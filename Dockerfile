@@ -1,7 +1,7 @@
 FROM node:23.0.0
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /src
 
 # Install app dependencies
 COPY package*.json ./

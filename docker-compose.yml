@@ -2,8 +2,8 @@
 
 services:
   nestapp:
-    container_name: nestapp
-    image: francescoxx/nestapp:1.0.0
+    container_name: nestcrudlive
+    image: nestjscrudlive
     build: .
     ports:
       - 3000:3000
@@ -21,10 +21,11 @@ services:
         restart: true
 
   db:
-    container_name: db
+    container_name: postgres_db
     image: postgres:12
     ports:
       - 5432:5432
+      - 9229:9229      
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
