@@ -73,32 +73,30 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 Nest is [MIT licensed](LICENSE).
 
 
-curl --location 'localhost:3000/users' \
---header 'Content-Type: application/json' \
---data '    {
-        "name": "namevalue2",
-        "email": "eamilvalue2"
-    }'
+curl --location 'localhost:3000/users' 
 
-    curl --location --request GET 'localhost:3000/users' \
+
+    curl --location --request POST 'http://localhost:3000/users' \
 --header 'Content-Type: application/json' \
 --data '    {
         "name": "namevalue2",
         "email": "eamilvalue2"
     }'   
+ 
 
-    Invoke-RestMethod -Uri https://blogs.msdn.microsoft.com/powershell/feed/
+curl -d '{"name":"nameval1", "email":"emailval2"}' -H "Content-Type: application/json" -X POST http://localhost:3000/users
+
+
     Invoke-RestMethod -Uri http://localhost:3000/users  
 
-    Invoke-RestMethod -Method 'Post' -Uri http://localhost:3000/users -Headers $headers -Body  $Form
 
 $Form = @{ 
-'name'  = 'John' 
-'email' = 'Doe' 
+name  = 'John' 
+email = 'Doe' 
 }
 
-$headers = @{
-    'Content-Type' = 'application/json'
-}
- Invoke-RestMethod -Method 'Post' -Uri http://localhost:3000/users -Headers $headers -Body $Form
+$json=convertto-json($form22)
+
+ Invoke-RestMethod 'http://localhost:3000/users' -Method POST -Body $json  -ContentType 'application/json'
  
+This works for POST. Note I have to convert it to Json
