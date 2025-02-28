@@ -87,7 +87,7 @@ curl --location 'localhost:3000/users'
 curl -d '{"name":"nameval1", "email":"emailval2"}' -H "Content-Type: application/json" -X POST http://localhost:3000/users
 
 
-    Invoke-RestMethod -Uri http://localhost:3000/users  
+    docker logs c8f0819a40ed 
 
 
 $Form = @{ 
@@ -95,7 +95,7 @@ name  = 'John'
 email = 'Doe' 
 }
 
-$json=convertto-json($form22)
+$json=convertto-json($form)
 
  Invoke-RestMethod 'http://localhost:3000/users' -Method POST -Body $json  -ContentType 'application/json'
  
