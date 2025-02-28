@@ -12,7 +12,7 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-
+RUN npm ci
 RUN npm run build
 
 EXPOSE 3000
