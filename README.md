@@ -100,3 +100,8 @@ $json=convertto-json($form22)
  Invoke-RestMethod 'http://localhost:3000/users' -Method POST -Body $json  -ContentType 'application/json'
  
 This works for POST. Note I have to convert it to Json
+
+Remove all images
+docker images -a -q | % { docker image rm $_ -f }
+docker ps -q | % { docker stop $_ }
+      

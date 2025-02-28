@@ -14,7 +14,10 @@ services:
       - PG_PASSWORD=postgres
       - PG_DB=postgres
       - PG_PORT=5432
-    command: npm run start
+    volumes:
+      - .:/src:cached      
+    # command: npm run start
+    command: tail -F really    # This means Nestjs not started immediatley but in terminal
     depends_on:
       db:
         condition: service_healthy
