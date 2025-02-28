@@ -16,8 +16,8 @@ services:
       - PG_PORT=5432
     volumes:
       - .:/src:cached      
-    # command: npm run start
-    command: tail -F really    # This means Nestjs not started immediatley but in terminal
+    command: npm run start
+    # command: tail -F really    # This means Nestjs not started immediatley but in terminal
     depends_on:
       db:
         condition: service_healthy
