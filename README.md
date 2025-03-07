@@ -104,4 +104,8 @@ This works for POST. Note I have to convert it to Json
 Remove all images
 docker images -a -q | % { docker image rm $_ -f }
 docker ps -q | % { docker stop $_ }
+
+
+adding pino logger https://github.com/iamolegga/nestjs-pino/blob/master/README.md
+
       
