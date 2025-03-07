@@ -14,7 +14,13 @@ import { LoggerModule } from 'nestjs-pino';
           context: 'HTTP',
         }),
         transport: {
-          target: 'pino-pretty',
+          targets: [
+            { target: 'pino-pretty' },
+            {
+              target: 'pino/file',
+              options: { destination: 'logs/debug.log', mkdir: true },
+            },
+          ],
         },
       },
     }),
