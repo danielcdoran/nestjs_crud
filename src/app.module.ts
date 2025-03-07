@@ -8,7 +8,16 @@ import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
-    LoggerModule.forRoot(),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        customProps: (_req, _res) => ({
+          context: 'HTTP',
+        }),
+        transport: {
+          target: 'pino-pretty',
+        },
+      },
+    }),
     ConfigModule.forRoot(),
     UsersModule,
     TypeOrmModule.forRoot({
