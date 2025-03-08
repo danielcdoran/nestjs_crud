@@ -108,4 +108,6 @@ docker ps -q | % { docker stop $_ }
 
 adding pino logger https://github.com/iamolegga/nestjs-pino/blob/master/README.md
 
+git config --global core.autocrlf false
+
       
