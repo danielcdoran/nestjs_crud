@@ -9,7 +9,7 @@ import { LoggerModule } from 'nestjs-pino';
 @Module({
   imports: [
     LoggerModule.forRoot({
-      pinoHttp: {
+      pinoHttp: { 
         customProps: (_req, _res) => ({
           context: 'HTTP',
         }),
@@ -22,7 +22,10 @@ import { LoggerModule } from 'nestjs-pino';
             },
             {
               target: 'pino-pretty',
-              options: { destination: 'logs/prettydebug.log', mkdir: true },
+              options: {
+                destination: 'logs/prettydebug-%DATE%.log',
+                mkdir: true,
+              },
             },
           ],
         },
