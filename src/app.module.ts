@@ -20,6 +20,10 @@ import { LoggerModule } from 'nestjs-pino';
               target: 'pino/file',
               options: { destination: 'logs/debug.log', mkdir: true },
             },
+            {
+              target: 'pino-pretty',
+              options: { destination: 'logs/prettydebug.log', mkdir: true },
+            },
           ],
         },
       },
