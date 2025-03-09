@@ -9,6 +9,12 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
+    import {
+      ApiNotFoundResponse,
+      ApiOkResponse,
+      ApiOperation,
+      ApiParam,
+    } from '@nestjs/swagger';
 
 @Controller('users')
 export class UsersController {
