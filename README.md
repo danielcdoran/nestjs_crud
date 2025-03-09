@@ -117,4 +117,8 @@ https://www.npmjs.com/package/nest-openapi-tools
 https://openapi-generator.tech/docs/generators/typescript-nestjs/
 https://arnaudcortisse.com/blog/trying-out-nestjs-part-1/
 
+  This outputs JSON
+  http://localhost:3001/api-json
+  This is saved using https://editor.swagger.io/ from https://github.com/arnaud-cortisse/trying-out-nestjs-part-3.git 
+
       
