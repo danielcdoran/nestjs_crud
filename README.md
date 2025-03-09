@@ -110,4 +110,11 @@ adding pino logger https://github.com/iamolegga/nestjs-pino/blob/master/README.m
 
 git config --global core.autocrlf false
 
+
+OpenAPI tools
+
+https://www.npmjs.com/package/nest-openapi-tools
+https://openapi-generator.tech/docs/generators/typescript-nestjs/
+https://arnaudcortisse.com/blog/trying-out-nestjs-part-1/
+
       
