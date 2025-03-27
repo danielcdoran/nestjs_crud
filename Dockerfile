@@ -8,11 +8,11 @@ WORKDIR /src
 # Install app dependencies
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --force
 
 # Bundle app source
 COPY . .
-RUN npm ci
+# RUN npm ci
 RUN npm run build
 
 EXPOSE 3000
