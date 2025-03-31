@@ -9,12 +9,13 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
-    import {
-      ApiNotFoundResponse,
-      ApiOkResponse,
-      ApiOperation,
-      ApiParam,
-    } from '@nestjs/swagger';
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+} from '@nestjs/swagger';
+import { UserDto } from './user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -36,6 +37,11 @@ export class UsersController {
       return user;
     }
   }
+  @Get(':id')
+  @ApiOkResponse({
+    description: 'User not found.',
+    type: UserDto,
+  })
 
   //create user
   @Post()

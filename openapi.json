@@ -15,8 +15,10 @@
         "parameters": [],
         "responses": { "200": { "description": "" } },
         "tags": ["Users"]
-      },
-      "post": {
+      }
+    },
+    "/users/{id}": {
+      "get": {
         "operationId": "UsersController_create",
         "parameters": [],
         "requestBody": {
@@ -27,22 +29,16 @@
             }
           }
         },
-        "responses": { "201": { "description": "" } },
-        "tags": ["Users"]
-      }
-    },
-    "/users/{id}": {
-      "get": {
-        "operationId": "UsersController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "number" }
+        "responses": {
+          "200": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
           }
-        ],
-        "responses": { "200": { "description": "" } },
+        },
         "tags": ["Users"]
       },
       "put": {
@@ -83,13 +79,35 @@
   },
   "info": {
     "title": "Tasks",
-    "description": "The tasks API description",
+    "description": "The users API description",
     "version": "1.0",
     "contact": {}
   },
   "tags": [{ "name": "tasks", "description": "" }],
   "servers": [],
   "components": {
-    "schemas": { "User": { "type": "object", "properties": {} } }
+    "schemas": {
+      "User": { "type": "object", "properties": {} },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User name",
+            "minLength": 3,
+            "maxLength": 30,
+            "default": "Default name"
+          },
+          "email": {
+            "type": "string",
+            "description": "email",
+            "minLength": 11,
+            "maxLength": 44,
+            "default": "Default email"
+          }
+        },
+        "required": ["name", "email"]
+      }
+    }
   }
 }

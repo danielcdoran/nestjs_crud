@@ -48,7 +48,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Tasks')
-    .setDescription('The tasks API description')
+    .setDescription('The users API description')
     .setVersion('1.0')
     .addTag('tasks')
     .build();

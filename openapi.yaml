@@ -18,7 +18,8 @@ paths:
           description: ''
       tags:
         - Users
-    post:
+  /users/{id}:
+    get:
       operationId: UsersController_create
       parameters: []
       requestBody:
@@ -28,22 +29,12 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
       responses:
-        '201':
-          description: ''
-      tags:
-        - Users
-  /users/{id}:
-    get:
-      operationId: UsersController_findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: number
-      responses:
         '200':
-          description: ''
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
       tags:
         - Users
     put:
@@ -80,7 +71,7 @@ paths:
         - Users
 info:
   title: Tasks
-  description: The tasks API description
+  description: The users API description
   version: '1.0'
   contact: {}
 tags:
@@ -92,3 +83,21 @@ components:
     User:
       type: object
       properties: {}
+    UserDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: User name
+          minLength: 3
+          maxLength: 30
+          default: Default name
+        email:
+          type: string
+          description: email
+          minLength: 11
+          maxLength: 44
+          default: Default email
+      required:
+        - name
+        - email

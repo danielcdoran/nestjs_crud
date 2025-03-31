@@ -11,7 +11,7 @@
    name: string;
 
    @ApiProperty({
-     description: 'eamil',
+     description: 'email',
      minLength: 11,
      maxLength: 44,
      default: 'Default email',
