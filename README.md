@@ -124,3 +124,6 @@ https://arnaudcortisse.com/blog/trying-out-nestjs-part-1/
 
 https://arnaudcortisse.com/blog/trying-out-nestjs-part-1/
       
+      https://www.npmjs.com/package/nest-openapi-tools
+
+https://www.npmjs.com/package/@fresha/openapi-codegen-server-nestjs
