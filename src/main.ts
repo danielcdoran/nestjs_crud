@@ -45,6 +45,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+app.useLogger(app.get(Logger));
 
   const config = new DocumentBuilder()
     .setTitle('Tasks')

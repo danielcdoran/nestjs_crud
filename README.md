@@ -127,3 +127,17 @@ https://arnaudcortisse.com/blog/trying-out-nestjs-part-1/
       https://www.npmjs.com/package/nest-openapi-tools
 
 https://www.npmjs.com/package/@fresha/openapi-codegen-server-nestjs
+docker
+
+In terminal in VSCode
+docker compose exec nestapp sh
+docker compose exec nestapp bash
+Removing command: npm run start will mean that nestapp does not appear. If we then add in command: tail -F really that means we can attach to the nestapp service (docker compose exec nestapp bash) and run the application
+or add     tty: yes instead of tail and it works
+exit
+
+https://jestjs.io/docs/getting-started
+https://www.testim.io/blog/supertest-how-to-test-apis-like-a-pro/
+
+or use https://github.com/v-checha/nestjs-template.git
+
