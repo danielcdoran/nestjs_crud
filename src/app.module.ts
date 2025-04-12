@@ -4,33 +4,10 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { LoggerModule } from 'nestjs-pino';
+// import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
-    LoggerModule.forRoot({
-      pinoHttp: { 
-        customProps: (_req, _res) => ({
-          context: 'HTTP',
-        }),
-        transport: {
-          targets: [
-            { target: 'pino-pretty' },
-            {
-              target: 'pino/file',
-              options: { destination: 'logs/debug.log', mkdir: true },
-            },
-            {
-              target: 'pino-pretty',
-              options: {
-                destination: 'logs/prettydebug-%DATE%.log',
-                mkdir: true,
-              },
-            },
-          ],
-        },
-      },
-    }),
     ConfigModule.forRoot(),
     UsersModule,
     TypeOrmModule.forRoot({
