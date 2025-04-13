@@ -1,63 +1,81 @@
-import * as winston from 'winston';
+import { Injectable, LoggerService } from '@nestjs/common';
+import { createLogger, format, transports, Logger } from 'winston';
 import * as DailyRotateFile from 'winston-daily-rotate-file';
-import { fullFormat } from 'winston-error-format';
-/** Logging winston setup * */
-export class CustomLoggerService {
-  // dailyRotateFileTransport: any = null;
-  // myFormat: winston.Logform.Format = null;
-  // createLoggerConfig: winston.LoggerOptions = null;
+import * as path from 'path';
+import * as fs from 'fs';
+
+@Injectable()
+export class CustomLoggerService implements LoggerService {
+  private logger: Logger;
+
   constructor() {
-    this.dailyRotateFileTransport = new DailyRotateFile({
-      filename: `logs/app_log-%DATE%.log`,
-      datePattern: 'YYYY-MM-DD-HH-mm-ss',
-      zippedArchive: false,
-      maxSize: '20m',
-      maxFiles: '1d',
-    });
+    const logDir = path.join(process.cwd(), 'logs');
 
-    // this.myFormat = winston.format.printf(
-    //   ({ level = 'info', message, timestamp, req, err, ...metadata }) => {
-    //     if (!req) {
-    //       req = { headers: {} };
-    //     }
+    // Create log directory if it doesn't exist
+    if (!fs.existsSync(logDir)) {
+      fs.mkdirSync(logDir, { recursive: true });
+    }
 
-    //     let msg = `${timestamp} [${level}] : ${message} `;
-    //     const json: any = {
-    //       timestamp,
-    //       level,
-    //       ...metadata,
-    //       message,
-    //       error: {},
-    //     };
-
-    //     if (err) {
-    //       json.error = err.stack || err;
-    //     }
-
-    //     msg = JSON.stringify(json);
-    //     return msg;
-    //   },
-    // );
-    this.myFormat = fullFormat();
-
-    this.createLoggerConfig = {
-      /** Warn level Also includes error * */
-      level: 'warn',
-      format: winston.format.combine(
-        winston.format.splat(),
-        winston.format.errors({ stack: true }),
-        winston.format.json(),
-        winston.format.timestamp({
-          format: 'YYYY-MM-DD HH:mm:ss',
-        }),
-        this.myFormat,
-      ),
-
-      transports: [
-        new winston.transports.Console({ level: 'info' }),
-        this.dailyRotateFileTransport,
-        // Other transports
-      ],
+    const transportOptions = {
+      file: new DailyRotateFile({
+        filename: path.join(logDir, 'application-%DATE%.log'),
+        datePattern: 'YYYY-MM-DD-HH-mm-ss',
+        zippedArchive: true,
+        maxSize: '20m',
+        maxFiles: '30d', // Keep logs for 30 days
+        auditFile: path.join(logDir, 'audit.json'),
+        format: format.combine(format.timestamp(), format.json()),
+      }),
+      console: new transports.Console({
+        format: format.combine(
+          format.colorize(),
+          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+          format.printf(({ timestamp, level, message, context }) => {
+            return `${timestamp} [${level}] ${context ? `[${context}] ` : ''}${message}`;
+          }),
+        ),
+      }),
     };
+
+    this.logger = createLogger({
+      level: 'info',
+      levels: {
+        error: 0,
+        warn: 1,
+        info: 2,
+        http: 3,
+        verbose: 4,
+        debug: 5,
+        silly: 6,
+      },
+      format: format.combine(
+        format.timestamp(),
+        format.errors({ stack: true }),
+        format.json(),
+      ),
+      transports: [transportOptions.file, transportOptions.console],
+      exceptionHandlers: [transportOptions.file, transportOptions.console],
+      exitOnError: false,
+    });
+  }
+
+  log(message: string, context?: string) {
+    this.logger.info(message, { context });
+  }
+
+  error(message: string, trace?: string, context?: string) {
+    this.logger.error(message, { trace, context });
+  }
+
+  warn(message: string, context?: string) {
+    this.logger.warn(message, { context });
+  }
+
+  debug(message: string, context?: string) {
+    this.logger.debug(message, { context });
+  }
+
+  verbose(message: string, context?: string) {
+    this.logger.verbose(message, { context });
   }
 }
