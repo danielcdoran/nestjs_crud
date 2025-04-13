@@ -17,7 +17,7 @@ export class UsersService {
 
   // get one user
   async findOne(id: number): Promise<User> {
-    return await this.usersRepository.findOne({ where : { id } });
+    return await this.usersRepository.findOneOrFail({ where: { id } });
   }
 
   //create user
@@ -29,7 +29,7 @@ export class UsersService {
   // update user
   async update(id: number, user: User): Promise<User> {
     await this.usersRepository.update(id, user);
-    return await this.usersRepository.findOne( { where : { id } } );
+    return await this.usersRepository.findOneOrFail({ where: { id } });
   }
 
   // delete user

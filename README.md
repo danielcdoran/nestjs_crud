@@ -144,3 +144,7 @@ or use https://github.com/v-checha/nestjs-template.git
 
 /src/src/app.controller.spec.ts failed becuase
 Nest can't resolve dependencies of the PinoLogger (?). Please make sure that the argument "pino-params" at index [0] is available in the RootTestModule context.
+Chnaged to winston and found working sample
+
+
+https://www.typescriptlang.org/tsconfig/#strictNullChecks
