@@ -6,12 +6,12 @@ WORKDIR /src
 # USER node
 
 # Install app dependencies
-COPY package*.json ./
-
+# COPY package*.json ./
+COPY . .
 RUN npm install --force
 
 # Bundle app source
-COPY . .
+
 # RUN npm ci
 RUN npm run build
 
