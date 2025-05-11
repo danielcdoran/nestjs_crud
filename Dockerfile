@@ -1,4 +1,5 @@
-FROM node:23.0.0
+ARG NODE_VERSION=23.0.0
+FROM node:${NODE_VERSION}
 
 # Create app directory
 WORKDIR /src
