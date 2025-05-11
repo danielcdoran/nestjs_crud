@@ -87,7 +87,7 @@ curl --location 'localhost:3000/users'
 curl -d '{"name":"nameval1", "email":"emailval2"}' -H "Content-Type: application/json" -X POST http://localhost:3000/users
 
 
-    docker logs c8f0819a40ed 
+    Invoke-RestMethod -Uri http://localhost:3000/users  
 
 
 $Form = @{ 
@@ -95,56 +95,8 @@ name  = 'John'
 email = 'Doe' 
 }
 
-$json=convertto-json($form)
+$json=convertto-json($form22)
 
  Invoke-RestMethod 'http://localhost:3000/users' -Method POST -Body $json  -ContentType 'application/json'
  
 This works for POST. Note I have to convert it to Json
-
-Remove all images
-docker images -a -q | % { docker image rm $_ -f }
-docker ps -q | % { docker stop $_ }
-
-
-adding pino logger https://github.com/iamolegga/nestjs-pino/blob/master/README.md
-
-git config --global core.autocrlf false
-
-
-OpenAPI tools
-
-https://www.npmjs.com/package/nest-openapi-tools
-https://openapi-generator.tech/docs/generators/typescript-nestjs/
-https://arnaudcortisse.com/blog/trying-out-nestjs-part-1/
-
-  This outputs JSON
-  http://localhost:3000/api-json
-  
-  This is saved using https://editor.swagger.io/ from https://github.com/arnaud-cortisse/trying-out-nestjs-part-3.git 
-
-https://arnaudcortisse.com/blog/trying-out-nestjs-part-1/
-      
-      https://www.npmjs.com/package/nest-openapi-tools
-
-https://www.npmjs.com/package/@fresha/openapi-codegen-server-nestjs
-docker
-
-In terminal in VSCode
-docker compose exec nestapp sh
-docker compose exec nestapp bash
-Removing command: npm run start will mean that nestapp does not appear. If we then add in command: tail -F really that means we can attach to the nestapp service (docker compose exec nestapp bash) and run the application
-or add     tty: yes instead of tail and it works
-exit
-
-https://jestjs.io/docs/getting-started
-https://www.testim.io/blog/supertest-how-to-test-apis-like-a-pro/
-
-or use https://github.com/v-checha/nestjs-template.git
-
-
-/src/src/app.controller.spec.ts failed becuase
-Nest can't resolve dependencies of the PinoLogger (?). Please make sure that the argument "pino-params" at index [0] is available in the RootTestModule context.
-Chnaged to winston and found working sample
-
-
-https://www.typescriptlang.org/tsconfig/#strictNullChecks
