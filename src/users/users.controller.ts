@@ -9,14 +9,6 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
-import {
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiOperation,
-  ApiParam,
-  ApiResponse,
-} from '@nestjs/swagger';
-import { UserDto } from './user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -24,21 +16,12 @@ export class UsersController {
 
   //get all users
   @Get()
-  @ApiOkResponse({
-    description: 'No Users found.',
-    type: UserDto,
-    isArray: true,
-  })
   async findAll(): Promise<User[]> {
     return await this.usersService.findall();
   }
 
   //get one user
   @Get(':id')
-  @ApiOkResponse({
-    description: 'User not found.',
-    type: UserDto,
-  })
   async findOne(@Param('id') id: number): Promise<User> {
     const user = await this.usersService.findOne(id);
     if (!user) {
@@ -47,11 +30,6 @@ export class UsersController {
       return user;
     }
   }
-  // @Get(':id')
-  // @ApiOkResponse({
-  //   description: 'User not found.',
-  //   type: UserDto,
-  // })
 
   //create user
   @Post()

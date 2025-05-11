@@ -100,3 +100,6 @@ $json=convertto-json($form22)
  Invoke-RestMethod 'http://localhost:3000/users' -Method POST -Body $json  -ContentType 'application/json'
  
 This works for POST. Note I have to convert it to Json
+http://localhost:3000/users and users are output
+
+localhost:3000/api OpenAPI spec appears as output
