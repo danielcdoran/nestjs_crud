@@ -4,12 +4,17 @@ services:
   nestapp:
     container_name: nestcrudlive
     image: nestjscrudlive
-    build: .
+    build:
+      context: .
+      target: ${NODE_ENV}
+      args:
+      - NODE_ENV=${NODE_ENV}
     env_file:
       - .env.dev
     ports:
       - 3000:3000
     environment:
+      - NODE_ENV=${NODE_ENV}
       - DB_TYPE=postgres
       - PG_HOST=db 
       - PG_USER=postgres
@@ -18,7 +23,7 @@ services:
       - PG_PORT=5432
     # volumes:
     #   - .:/src:cached
-    command: npm run start
+    # command: npm run start
     depends_on:
       db:
         condition: service_healthy
