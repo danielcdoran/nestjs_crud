@@ -11,7 +11,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot(),
     UsersModule,
     TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE as any,
+      type: process.env.DB_TYPE as string,
       host: process.env.PG_HOST,
       port: parseInt(process.env.PG_PORT || ''),
       username: process.env.PG_USER,
