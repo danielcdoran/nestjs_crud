@@ -1,7 +1,3 @@
 {
-    "files.eol": "\n",
-    "editor.formatOnSave": true,
-    "[javascript][typescript][javascriptreact][typescriptreact]": {
-        "editor.defaultFormatter": "biomejs.biome"
-    }
+    // "files.eol": "\n",
 }
