@@ -1,10 +1,66 @@
+
+
 services:
-  nestcrudlive:
-    image: nestcrudlive
+  nestapp:
+    container_name: nestcrudlive
+    image: nestjscrudlive
     build:
       context: .
-      dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
+      target: ${NODE_ENV}
+      args:
+      - NODE_ENV=${NODE_ENV}
+    env_file:
+      - .env.dev
     ports:
       - 3000:3000
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DB_TYPE=postgres
+      - PG_HOST=db 
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_DB=postgres
+      - PG_PORT=5432
+    # volumes:
+    #   - .:/src:cached
+    # command: npm run start
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+
+  db:
+    container_name: postgres_db
+    image: postgres:12
+    ports:
+      - 5432:5432
+      - 9229:9229      
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+        interval: 10s
+        retries: 5
+        start_period: 30s
+        timeout: 10s    
+
+  postgres_admin:
+    image: dpage/pgadmin4:9.0
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: admin@admin.de
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 5050:80
+    volumes:
+        - ./db/servers.json:/pgadmin4/servers.json
+
+volumes:
+  pgdata: {}
