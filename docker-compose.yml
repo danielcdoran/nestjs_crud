@@ -12,7 +12,7 @@ services:
     # reflect file changes from host to container
     volumes:
       - .:/src
-      - /src/node_modules
+      # - /src/node_modules
     # Run in Debug Mode: npm run start:debug --> Don't forget to start your vscode debugger!
     # Run in dev Mode: npm run start:dev
     command: npm run start:debug

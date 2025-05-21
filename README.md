@@ -103,3 +103,17 @@ This works for POST. Note I have to convert it to Json
 http://localhost:3000/users and users are output
 
 localhost:3000/api OpenAPI spec appears as output
+
+Run to debug
+docker compose up
+Console will show Debugging attachd message
+F5 to attach debugger
+Set breakpoint in app.service.ts
+use localhost:3000 and it will stop at breakpoint
+
+Messages will be
+Starting compilation
+Debugger listening
+Debugger attached
+Multiple lines of output
+F5....Debugger attached
