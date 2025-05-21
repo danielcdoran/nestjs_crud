@@ -1,18 +1,29 @@
-
-
+version: "3.8"
 services:
-  nestapp:
-    container_name: nestcrudlive
-    image: nestjscrudlive
+  api:
+    # image: thomas-oliver/nestjs-dockerized 
     build:
+      dockerfile: Dockerfile
       context: .
-      target: ${NODE_ENV}
-      args:
-      - NODE_ENV=${NODE_ENV}
-    env_file:
-      - .env
+      # Only will build development stage from our dockerfile
+      target: development
+    # Mount our host Directory to the docker container
+    # Mount (.) current directory to the docker container thomas/src/app
+    # reflect file changes from host to container
+    volumes:
+      - .:/src
+      - /src/node_modules
+    # Run in Debug Mode: npm run start:debug --> Don't forget to start your vscode debugger!
+    # Run in dev Mode: npm run start:dev
+    command: npm run start:debug
+
     ports:
       - 3000:3000
+      # debugging port
+      - 9229:9229
+
+    env_file:
+      - .env
     environment:
       - NODE_ENV=${NODE_ENV}
       - DB_TYPE=postgres
@@ -21,9 +32,7 @@ services:
       - PG_PASSWORD=postgres
       - PG_DB=postgres
       - PG_PORT=5432
-    # volumes:
-    #   - .:/src:cached
-    # command: npm run start
+
     depends_on:
       db:
         condition: service_healthy
@@ -34,7 +43,7 @@ services:
     image: postgres:12
     ports:
       - 5432:5432
-      - 9229:9229      
+      # - 9229:9229      
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
