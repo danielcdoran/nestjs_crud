@@ -112,8 +112,18 @@ Set breakpoint in app.service.ts
 use localhost:3000 and it will stop at breakpoint
 
 Messages will be
-Starting compilation
+Starting compilation in watch mode
 Debugger listening
 Debugger attached
 Multiple lines of output
 F5....Debugger attached
+
+to run lint
+docker-compose exec api bash
+opens a bash terminal and allows us to run lint etc
+docker-compose exec api bash
+creTES  bash terminal. Can run npm run lint
+docker-compose exec nest bashdocker-compose exec nest bashdocker-compose exec nest bashidocker-compose exec nest 
+bash is running n background
+
+https://github.com/dominicarrojado/nestjs-postgres-boilerplate/blob/main/.vscode/settings.json                              This uses multiple tRGETS
