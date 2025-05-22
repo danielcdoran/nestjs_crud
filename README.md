@@ -123,7 +123,13 @@ docker-compose exec api bash
 opens a bash terminal and allows us to run lint etc
 docker-compose exec api bash
 creTES  bash terminal. Can run npm run lint
-docker-compose exec nest bashdocker-compose exec nest bashdocker-compose exec nest bashidocker-compose exec nest 
-bash is running n background
 
-https://github.com/dominicarrojado/nestjs-postgres-boilerplate/blob/main/.vscode/settings.json                              This uses multiple tRGETS
+
+https://github.com/dominicarrojado/nestjs-postgres-boilerplate/blob/main/.vscode/settings.json                             
+This uses multiple targets and multiple yml files
+
+Change targets in docker-compose.yml so different Dockerfile are used
+production
+development     deve
+test            run tests
+test-cov        run coverage

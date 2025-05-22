@@ -6,7 +6,7 @@
 # also name our image as development (can be anything)
 ARG NODE_VERSION=23.0.0
 FROM node:${NODE_VERSION} AS development
-
+ENV NODE_ENV=dev
 # Specify our working directory, this is in our container/in our image
 WORKDIR /src
 
@@ -22,7 +22,14 @@ COPY . .
 
 # Build the app to the /dist folder
 RUN npm run build
+CMD [ "npm", "run","start:dev" ]
 
+FROM development AS test
+ENV NODE_ENV=test
+CMD [ "npm", "run", "test" ]
+
+FROM test AS test-cov
+CMD [ "npm", "run", "test:cov" ]
 ################
 ## PRODUCTION ##
 ################
