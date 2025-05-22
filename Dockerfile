@@ -24,6 +24,28 @@ COPY . .
 RUN npm run build
 CMD [ "npm", "run","start:dev" ]
 
+
+
+
+FROM node:${NODE_VERSION} AS build
+ENV NODE_ENV=dev
+# Specify our working directory, this is in our container/in our image
+WORKDIR /src
+
+# Copy the package.jsons from host to container
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+
+# Here we install all the deps
+RUN npm install
+
+# Bundle app source / copy all other files
+COPY . .
+
+CMD [ "npm", "run","build" ]
+
+
+
 FROM development AS test
 ENV NODE_ENV=test
 CMD [ "npm", "run", "test" ]
